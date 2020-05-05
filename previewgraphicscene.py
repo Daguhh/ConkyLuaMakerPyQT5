@@ -26,7 +26,7 @@ class MyGraphicScene(QtWidgets.QGraphicsScene):
         self.setSceneRect(0,0,600,400)
         self.clear()
 
-        self.wait_for_input = False
+        self.wait_for_input = -1
         self.ellipse_count = 0
 
     def send_object_list(self, drawings):
@@ -49,12 +49,6 @@ class MyGraphicScene(QtWidgets.QGraphicsScene):
             self.wait_for_input -= 1
             pos = (e.scenePos().x(), e.scenePos().y())
             self.drawings.draws_dct[self.requester_ID].get_input(pos)
-            #self.ellipse_count += 1
-            #ellipse = MyEllipse(e.scenePos().x(), e.scenePos().y(), 70, 70)
-            #ellipse.name = f'ellipse {self.ellipse_count}'
-            #self.addItem(ellipse)
-            #print(ellipse)
-            #self.wait_for_input = False
         else:
             QtWidgets.QGraphicsScene.mousePressEvent(self, e)
 

@@ -72,6 +72,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ID = self.drawings.create(self.sender().objectName())
         nb_input = self.drawings.draws_dct[ID].nb_input
         self.previewgraphicview.scene.input_request(ID, nb_input)
+        self.ObjectList.addItem(ID)
+        self.PropList.setColumnCount(2)
+        self.PropList.setRowCount(len(self.drawings.draws_dct[ID].properties))
+        for i, (k, v) in enumerate(self.drawings.draws_dct[ID].properties.items()):
+            print('----------------------------------')
+            print(k,v)
+            self.PropList.setItem(i,0, QtWidgets.QTableWidgetItem(k))
+            self.PropList.setItem(i,1, QtWidgets.QTableWidgetItem(str(v)))
+            #self.tableWidget.setItem(i, j, QTableWidgetItem("00"))
 
 
     def change_grid_size(self):

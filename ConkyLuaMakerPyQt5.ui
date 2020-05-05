@@ -803,7 +803,7 @@
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_4">
                   <item>
-                   <widget class="QListView" name="ObjectList"/>
+                   <widget class="QListWidget" name="ObjectList"/>
                   </item>
                  </layout>
                 </widget>
@@ -836,7 +836,7 @@
             <widget class="QWidget" name="widget_4" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
-               <widget class="QTableView" name="PropList"/>
+               <widget class="QTableWidget" name="PropList"/>
               </item>
              </layout>
             </widget>
@@ -963,22 +963,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>ellipsegraphBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>ObjectList</receiver>
-   <slot>update()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>113</x>
-     <y>147</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>594</x>
-     <y>171</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

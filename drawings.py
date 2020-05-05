@@ -5,6 +5,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QGraphicsEllipseItem, QGraphicsRectItem, QGraphicsLineItem, QGraphicsItem
 
+from lua_drawings_dict import ELLIPSE_GRAPH
 
 class DrawingsList:
 
@@ -13,7 +14,9 @@ class DrawingsList:
         self.q_objects = {'ellipsegraphBtn' : MyEllipse,
                             'Ring Graph' : MyEllipse}
         #self.draw_generator()
-        self.genID = self.id_generator()
+        id_generator = self.id_generator()
+        self.genID = id_generator()
+        #self.genID = self.genID1()
 
     @staticmethod
     def id_generator():
@@ -28,7 +31,8 @@ class DrawingsList:
         print(item)
 
         if item in self.q_objects.keys():
-            new_id = self.genID()
+            new_id = next(self.genID)
+            print(f' ======= id = {new_id} ==============')
             new_draw = DrawItem(self.q_objects[item])
             self.draws_dct[new_id] = new_draw
         else:
@@ -41,7 +45,7 @@ class DrawItem:
 
     def __init__(self, itemclass):
 
-        self.properties = {}
+        self.properties = ELLIPSE_GRAPH
         self.nb_input = 1
         #self.create(itemclass)
         self.buffer=[]

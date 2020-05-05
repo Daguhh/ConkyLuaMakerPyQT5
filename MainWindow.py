@@ -353,7 +353,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.ObjectList = QtWidgets.QListView(self.scrollAreaWidgetContents)
+        self.ObjectList = QtWidgets.QListWidget(self.scrollAreaWidgetContents)
         self.ObjectList.setObjectName("ObjectList")
         self.horizontalLayout_4.addWidget(self.ObjectList)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
@@ -374,8 +374,10 @@ class Ui_MainWindow(object):
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.widget_4)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.PropList = QtWidgets.QTableView(self.widget_4)
+        self.PropList = QtWidgets.QTableWidget(self.widget_4)
         self.PropList.setObjectName("PropList")
+        self.PropList.setColumnCount(0)
+        self.PropList.setRowCount(0)
         self.horizontalLayout_5.addWidget(self.PropList)
         self.Properties.addWidget(self.widget_4)
         self.horizontalLayout.addWidget(self.Properties_2)
@@ -438,7 +440,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.DesignerTab.setCurrentIndex(0)
-        self.ellipsegraphBtn.clicked.connect(self.ObjectList.update)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
