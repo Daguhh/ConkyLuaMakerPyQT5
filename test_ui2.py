@@ -1,7 +1,8 @@
 import sys
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtGui
 
 from MainWindow import Ui_MainWindow
+from drawings import DrawingsList
 
 """
 ### Choice panel
@@ -47,33 +48,55 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Preview Panel Event
         #self.graphicsView.mousePressEvent(self.get_preview_input)
-        self.gridsizeslider.sliderMoved.connect(self.change_grid_size1)
-        self.gridsizeSpinBox.valueChanged.connect(self.change_grid_size2)
+        self.gridsizeslider.sliderMoved.connect(self.change_grid_size)
+        self.gridsizeSpinBox.valueChanged.connect(self.change_grid_size)
 
+        self.drawings = DrawingsList()
+        self.previewgraphicview.scene.send_object_list(self.drawings)
+
+#        fenetre_widget = QWidget()
+#
+#        self.scene = QGraphicsScene(self)
+#        self.scene.setSceneRect(0, 0, 200, 200)
+#        self.scene.clear()
+#
+#        self.view =QGraphicsView(self.scene)
+#        self.view.setScene(self.scene)
+#        self.view.setCacheMode(QGraphicsView.CacheBackground)↓
 
 
     def create_graph(self, e):
+        #self.previewgraphicview.scene.wait_for_input = True
         print("button clicked")
         print(self.sender().objectName())
+        ID = self.drawings.create(self.sender().objectName())
+        nb_input = self.drawings.draws_dct[ID].nb_input
+        self.previewgraphicview.scene.input_request(ID, nb_input)
 
-    def change_grid_size1(self):
-        #print(self.gridsizeslider.sliderPosition())
-        #print(self.sender().value())
+
+    def change_grid_size(self):
+        sender_name = self.sender().objectName()
         val = self.sender().value()
-        self.gridsizeSpinBox.setValue(val)
-        #self.gridsizeslider.setValue(val)
+        if sender_name == 'gridsizeslider':
+            self.gridsizeSpinBox.setValue(val)
+        elif sender_name == 'gridsizeSpinBox':
+            self.gridsizeslider.setValue(val)
+        self.graphicsView.gridsize = val
 
-    def change_grid_size2(self):
-        #print(self.gridsizeslider.sliderPosition())
-        #print(self.sender().value())
-        val = self.sender().value()
-        #self.gridsizeSpinBox.setValue(val)
-        self.gridsizeslider.setValue(val)
-
-        pass
 
     def get_preview_input(self):
         print(dir(self.sender()))
+
+class PreviewPanelFct:
+
+    @staticmethod
+    def change_grid_size():
+        sender_name = self.sender().objectName
+        print(sender_name)
+        if sender_name:
+            pass
+
+
 
 
 app = QtWidgets.QApplication(sys.argv)

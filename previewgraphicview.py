@@ -4,10 +4,26 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class PreviewGraphicView(QtWidgets.QGraphicsView):
+class PreviewGraphicScene(QtWidgets):
     def __init__(self, parent):
-        super(PreviewGraphicView, self).__init__(parent)
+        super().__init__(parent)
+
+
+        self.pen=QtGui.QPen(QtGui.QColor(QtCore.Qt.green))
+        self.pen.setWidth(5)
+
+        self.scene = QGraphicsScene(self)
+        self.scene.setSceneRect(0, 0, 200, 200)
+        self.scene.clear()
+
+        self.view =QGraphicsView(self.scene)
+        self.view.setScene(self.scene)
+        self.view.setCacheMode(QGraphicsView.CacheBackground)
 
     def mousePressEvent(self, e):
         print(e)
         print(e.pos())
+        print(e.x())
+        ellipse = self.scene.addEllipse(e.x(), e.y(), 50, 50, self.pen)
+        print(ellipse)
+        self.view.show()
